@@ -5,7 +5,7 @@ import com.ozruit.apigee.response.ApigeeColorSwatch;
 import com.ozruit.apigee.response.ApigeePrice;
 import com.ozruit.model.ColorSwatch;
 import com.ozruit.model.Product;
-import com.ozruit.service.response.ProductResponse;
+import com.ozruit.model.ProductResponse;
 import com.ozruit.util.ColorUtil;
 import com.ozruit.util.LabelFormatType;
 import com.ozruit.util.NumberUtil;

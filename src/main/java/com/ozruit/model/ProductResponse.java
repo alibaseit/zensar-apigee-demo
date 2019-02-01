@@ -1,4 +1,4 @@
-package com.ozruit.service.response;
+package com.ozruit.model;
 
 import com.ozruit.model.Product;
 

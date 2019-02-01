@@ -1,7 +1,7 @@
 package com.ozruit.controller;
 
 import com.ozruit.service.ProductService;
-import com.ozruit.service.response.ProductResponse;
+import com.ozruit.model.ProductResponse;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
