@@ -1,6 +1,15 @@
-# Find Products in Discount from Apigee
+# Zensar Apigee Demo
 
-The application is a Spring boot MVC application.
+The application is a Spring boot MVC application. Only end point is /categories/600001506/reduced-products?labelType=ShowWasThenNow
+It returns products which have prices reduction.
+
+URI: /categories/{category}/reduced-products?labelType=:labelType
+Request Method: GET
+Content Type: Application/json
+
+labelType can be one of (ShowWasNow, ShowWasThenNow, ShowPercDscount)
+
+
 
 For creating jar file and executing it ...
 ### Step 1:
