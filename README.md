@@ -1,7 +1,6 @@
 # Zensar Apigee Demo
 
-The application is a Spring boot MVC application. Only end point is /categories/600001506/reduced-products?labelType=ShowWasThenNow
-It returns products which have prices reduction.
+The application is a Spring boot MVC application. It returns products which have prices reduction.
 
 URI: /categories/{category}/reduced-products?labelType=:labelType
 Request Method: GET
