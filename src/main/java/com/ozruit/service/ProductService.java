@@ -12,6 +12,7 @@ import com.ozruit.util.NumberUtil;
 import org.springframework.stereotype.Service;
 
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -33,14 +34,17 @@ public class ProductService {
                     return apigeeProduct.getPrice().priceNow() < was;
                 })
                 .map(apigeeProduct -> {
+                    double was  = NumberUtil.toDouble(apigeeProduct.getPrice().getWas());
                     Product product = new Product();
                     product.setProductId(apigeeProduct.getProductId());
                     product.setTitle(apigeeProduct.getTitle());
                     product.setColorSwatches(toColorSwatch(apigeeProduct.getColorSwatches()));
                     product.setNowPrice(formatNowPrice(apigeeProduct.getPrice().priceNow(), apigeeProduct.getPrice().getCurrency()));
                     product.setPriceLabel(priceLabel(apigeeProduct.getPrice(), LabelFormatType.fromString(labelType)));
+                    product.setReduction(was - apigeeProduct.getPrice().priceNow());
                     return product;
                 })
+                .sorted(Comparator.comparing(Product::getReduction).reversed())
                 .collect(Collectors.toList());
 
         ProductResponse response = new ProductResponse();

@@ -1,5 +1,7 @@
 package com.ozruit.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import java.util.List;
 
 public class Product {
@@ -8,6 +10,17 @@ public class Product {
     private List<ColorSwatch> colorSwatches;
     private String nowPrice;
     private String priceLabel;
+
+    @JsonIgnore
+    private double reduction;
+
+    public double getReduction() {
+        return reduction;
+    }
+
+    public void setReduction(double reduction) {
+        this.reduction = reduction;
+    }
 
     public String getProductId() {
         return productId;
