@@ -21,7 +21,7 @@ public class ProductsController {
     @GetMapping(value = "/categories/{category}/reduced-products")
     ResponseEntity<ProductResponse> discountedProductsByCategory
             (@RequestParam(value = "labelType", defaultValue = "ShowWasNow") String labelType,
-             @PathVariable(value = "category", required = true) String category)
+             @PathVariable(value = "category") String category)
     {
 
         try {
