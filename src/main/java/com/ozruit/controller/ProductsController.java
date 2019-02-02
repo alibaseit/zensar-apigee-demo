@@ -1,10 +1,12 @@
 package com.ozruit.controller;
 
-import com.ozruit.service.ProductService;
+import com.ozruit.exception.BadRequestException;
 import com.ozruit.model.ProductResponse;
-import org.springframework.http.HttpStatus;
+import com.ozruit.model.ResponseStatus;
+import com.ozruit.service.ProductService;
+import com.ozruit.util.LabelFormatType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.server.ResponseStatusException;
 
 @RestController
 @RequestMapping()
@@ -17,16 +19,28 @@ public class ProductsController {
     }
 
     @GetMapping(value = "/categories/{category}/reduced-products")
-    ProductResponse discountedProductsByCategory
+    ResponseEntity<ProductResponse> discountedProductsByCategory
             (@RequestParam(value = "labelType", defaultValue = "ShowWasNow") String labelType,
              @PathVariable(value = "category", required = true) String category)
     {
 
         try {
-            return productService.getProducts(category, labelType);
+            validateLabelType(labelType);
+            final ProductResponse productResponse = productService.getProducts(category, labelType);
+            productResponse.setStatus(new ResponseStatus("OK", ""));
+            return ResponseEntity.ok(productResponse);
         } catch (Exception ex) {
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, ex.getMessage());
+            ProductResponse response = new ProductResponse();
+            response.setStatus(new ResponseStatus("ERROR", ex.getMessage()));
+            return ResponseEntity.badRequest().body(response);
         }
 
+    }
+
+    private void validateLabelType(String labelType) {
+        if (LabelFormatType.fromString(labelType) == null)
+            throw new BadRequestException(
+                    String.format("Invalid labelType: %s. It must be one of (ShowWasNow, ShowWasThenNow, ShowPercDscount)",
+                            labelType));
     }
 }

@@ -12,7 +12,7 @@ public enum LabelFormatType {
             case "SHOWPERCDSCOUNT":
                 return SHOW_PER_DISCOUNT;
             default:
-                return SHOW_WAS_NOW;
+                return null;
         }
     }
 }

@@ -11,6 +11,7 @@ import com.ozruit.util.LabelFormatType;
 import com.ozruit.util.NumberUtil;
 import org.springframework.stereotype.Service;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -76,15 +77,18 @@ public class ProductService {
     }
 
     private List<ColorSwatch> toColorSwatch(List<ApigeeColorSwatch> apigeeColorSwatches) {
-        return apigeeColorSwatches.stream()
-                .map(apigeeColorSwatch -> {
-                    ColorSwatch colorSwatch = new ColorSwatch();
-                    colorSwatch.setColor(apigeeColorSwatch.getColor());
-                    colorSwatch.setRgbColor(ColorUtil.toRGB(apigeeColorSwatch.getBasicColor()));
-                    colorSwatch.setSkuid(apigeeColorSwatch.getSkuId());
-                    return colorSwatch;
-                })
-                .collect(Collectors.toList());
+        if (apigeeColorSwatches != null)
+            return apigeeColorSwatches.stream()
+                    .map(apigeeColorSwatch -> {
+                        ColorSwatch colorSwatch = new ColorSwatch();
+                        colorSwatch.setColor(apigeeColorSwatch.getColor());
+                        colorSwatch.setRgbColor(ColorUtil.toRGB(apigeeColorSwatch.getBasicColor()));
+                        colorSwatch.setSkuid(apigeeColorSwatch.getSkuId());
+                        return colorSwatch;
+                    })
+                    .collect(Collectors.toList());
+        else
+            return Collections.emptyList();
     }
 
 }
