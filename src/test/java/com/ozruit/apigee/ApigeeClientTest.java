@@ -13,17 +13,10 @@ public class ApigeeClientTest {
     public void getProducts() {
         ApigeeProductClient apigeeClient = new ApigeeProductClient(new RestTemplate());
 
-        List<ApigeeProduct> products = apigeeClient.getProducts("6000015061");
+        List<ApigeeProduct> products = apigeeClient.getProducts("600001506");
 
         Assertions.assertThat(products).isNotNull();
         Assertions.assertThat(products.size()).isGreaterThan(0);
-        for (ApigeeProduct p : products) {
-            System.out.println(p.getTitle());
-            System.out.println(p.getColorSwatches());
-            System.out.println(p.getPrice().getNow());
-            double priceNow = p.getPrice().priceNow();
-            System.out.println(priceNow);
-        }
     }
 
     @Test
