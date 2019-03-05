@@ -23,18 +23,10 @@ public class ProductsController {
             (@RequestParam(value = "labelType", defaultValue = "ShowWasNow") String labelType,
              @PathVariable(value = "category") String category)
     {
-
-        try {
-            validateLabelType(labelType);
-            final ProductResponse productResponse = productService.getProducts(category, labelType);
-            productResponse.setStatus(new ResponseStatus("OK", ""));
-            return ResponseEntity.ok(productResponse);
-        } catch (Exception ex) {
-            ProductResponse response = new ProductResponse();
-            response.setStatus(new ResponseStatus("ERROR", ex.getMessage()));
-            return ResponseEntity.badRequest().body(response);
-        }
-
+        validateLabelType(labelType);
+        final ProductResponse productResponse = productService.getProducts(category, labelType);
+        productResponse.setStatus(new ResponseStatus("OK", ""));
+        return ResponseEntity.ok(productResponse);
     }
 
     private void validateLabelType(String labelType) {
