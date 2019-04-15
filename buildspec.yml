@@ -8,4 +8,6 @@ phases:
         commands:
             - echo Build completed on `date`
             - mvn package -DskipTests
-
+artifacts:
+  files:
+    - '**/*'
